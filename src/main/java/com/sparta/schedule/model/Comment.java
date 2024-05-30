@@ -32,4 +32,7 @@ public class Comment extends BaseEntity {
         this.schedule = schedule;
     }
 
+    public void update(String comment) {
+        this.comment = comment;
+    }
 }
