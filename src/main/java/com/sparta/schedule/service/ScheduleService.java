@@ -26,7 +26,7 @@ public class ScheduleService {
         return ScheduleResponse.toDto(findScheduleById(id));
     }
 
-    private Schedule findScheduleById(long id) {
+    protected Schedule findScheduleById(long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException("해당 Id에 맞는 일정을 찾을 수 없습니다."));
     }
