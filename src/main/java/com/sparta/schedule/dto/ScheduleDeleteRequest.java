@@ -7,13 +7,13 @@ import lombok.Getter;
 public class ScheduleDeleteRequest {
 
     @NotNull
-    private Long id;
+    private String username;
 
     @NotNull
     private String password;
 
-    public ScheduleDeleteRequest(Long id, String password) {
-        this.id = id;
+    public ScheduleDeleteRequest(String username, String password) {
+        this.username = username;
         this.password = password;
     }
 }

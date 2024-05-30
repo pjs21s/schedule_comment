@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -46,8 +47,8 @@ public class ScheduleService {
     }
 
     @Transactional
-    public ScheduleResponse update(ScheduleUpdateRequest request) {
-        Schedule schedule = findScheduleById(request.getId());
+    public ScheduleResponse update(long scheduleId, ScheduleUpdateRequest request) {
+        Schedule schedule = findScheduleById(scheduleId);
 
         if (!schedule.getPassword().equals(request.getPassword())) {
             throw new IllegalArgumentException("비밀번호가 맞지 않습니다.");
@@ -58,12 +59,17 @@ public class ScheduleService {
     }
 
     @Transactional
-    public void delete(ScheduleDeleteRequest request) {
-        Schedule schedule = findScheduleById(request.getId());
+    public void delete(long scheduleId, ScheduleDeleteRequest request) {
+        Schedule schedule = findScheduleById(scheduleId);
 
-        if (!schedule.getPassword().equals(request.getPassword())) {
+        if (!Objects.equals(schedule.getPassword(), request.getPassword())) {
             throw new IllegalArgumentException("비밀번호가 맞지 않습니다.");
         }
+
+        if (!Objects.equals(schedule.getUsername(), request.getUsername())) {
+            throw new IllegalArgumentException("사용자 이름이 동일하지 않습니다.");
+        }
+
         repository.delete(schedule);
     }
 }

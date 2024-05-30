@@ -38,15 +38,20 @@ public class ScheduleController {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(request));
     }
 
-    @PutMapping
+    @PatchMapping("/{scheduleId}")
     public ResponseEntity<ScheduleResponse> update(
+            @PathVariable(name = "scheduleId") long scheduleId,
             @Valid @RequestBody ScheduleUpdateRequest request) {
-        return ResponseEntity.ok().body(service.update(request));
+
+        return ResponseEntity.ok().body(service.update(scheduleId, request));
     }
 
-    @DeleteMapping
-    public ResponseEntity<String> delete(@Valid @RequestBody ScheduleDeleteRequest request) {
-        service.delete(request);
+    @DeleteMapping("/{scheduleId}")
+    public ResponseEntity<String> delete(
+            @PathVariable(name = "scheduleId") long scheduleId,
+            @Valid @RequestBody ScheduleDeleteRequest request) {
+
+        service.delete(scheduleId, request);
         return ResponseEntity.ok()
                 .body("성공적으로 삭제되었습니다.");
     }
