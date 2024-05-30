@@ -31,4 +31,14 @@ public class CommentController {
 
         return ResponseEntity.ok().body(service.update(scheduleId, commentId, request));
     }
+
+    @DeleteMapping("{commentId}")
+    public ResponseEntity<String> delete(
+            @PathVariable(name = "scheduleId") long scheduleId,
+            @PathVariable(name = "commentId") long commentId,
+            @RequestBody String username) {
+
+        service.delete(scheduleId, commentId, username);
+        return ResponseEntity.ok().body("성공적으로 댓글 삭제");
+    }
 }
