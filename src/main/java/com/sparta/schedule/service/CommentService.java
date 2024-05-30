@@ -25,11 +25,6 @@ public class CommentService {
     @Transactional
     public CommentResponse save(Long scheduleId, CommentCreateRequest request) {
 
-        // 선택한 일정의 아이디를 입력받지 않은 경우
-        if (scheduleId == null) {
-            throw new IllegalArgumentException("Schedule 아이디는 null이 될 수 없습니다.");
-        }
-
         // DB에 일정이 존재하지 않는 경우
         Schedule schedule = scheduleService.findScheduleById(scheduleId);
 
@@ -39,10 +34,6 @@ public class CommentService {
 
     @Transactional
     public CommentResponse update(Long scheduleId, Long commentId, CommentUpdateRequest request) {
-        // 선택한 일정이나 댓글 아이디가 입력받지 않은 경우
-        if (commentId == null || scheduleId == null) {
-            throw new IllegalArgumentException("선택한 일정이나 댓글 ID가 입력되지 않았습니다.");
-        }
 
         // DB에 일정이 존재하지 않는 경우
         scheduleRepository.findById(scheduleId)
@@ -62,9 +53,6 @@ public class CommentService {
     }
 
     public void delete(Long scheduleId, Long commentId, String username) {
-        if (scheduleId == null || commentId == null) {
-            throw new IllegalArgumentException("댓글 혹은 일정의 아이디가 없습니다.");
-        }
 
         // DB에 일정이 존재하지 않는 경우
         scheduleRepository.findById(scheduleId)
