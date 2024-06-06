@@ -20,8 +20,7 @@ public class ScheduleResponse {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;
 
-    public ScheduleResponse(Long id, String title, String description, String username,
-                            LocalDateTime createdAt) {
+    public ScheduleResponse(Long id, String title, String description, String username, LocalDateTime createdAt) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -30,10 +29,13 @@ public class ScheduleResponse {
     }
 
     public static ScheduleResponse toDto(Schedule schedule) {
-        return new ScheduleResponse(schedule.getId(),
+        return new ScheduleResponse(
+                schedule.getId(),
                 schedule.getTitle(),
                 schedule.getDescription(),
                 schedule.getUsername(),
-                schedule.getCreatedAt());
+                schedule.getCreatedAt()
+        );
     }
+
 }
