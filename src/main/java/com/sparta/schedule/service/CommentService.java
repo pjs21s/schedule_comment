@@ -80,4 +80,8 @@ public class CommentService {
 
         commentRepository.delete(comment);
     }
+
+    public void findById(Long contentId) {
+
+    }
 }
